@@ -1,4 +1,4 @@
-package com.example.events;
+package com.example.inflearnrestapiwithspring.events;
 
 import org.junit.jupiter.api.Test;
 

@@ -1,4 +1,4 @@
-package com.example.events;
+package com.example.inflearnrestapiwithspring.events;
 
 public enum EventStatus {
 
