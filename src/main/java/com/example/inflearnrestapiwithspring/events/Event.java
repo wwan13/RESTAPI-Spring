@@ -25,5 +25,5 @@ public class Event {
     private boolean offline;
     private boolean free;
     @Enumerated(EnumType.STRING)    // 기본 타입이 0,1,2 정수형이지만 이것을 문자열로 바꿔줌
-    private EventStatus eventStatus;
+    private EventStatus eventStatus = EventStatus.DRAFT;
 }
