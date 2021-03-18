@@ -57,7 +57,7 @@ public class EventControllerTests {
     }
 
     @Test
-    public void createEvent_BadRequest_UselessDatas() throws Exception {
+    public void createEventTest_BadRequest_UselessDatas() throws Exception {
 
         Event event = Event.builder()
                 .id(100)
@@ -85,13 +85,33 @@ public class EventControllerTests {
     }
 
     @Test
-    public void createEvent_BadRequest_EmptyInput() throws Exception {
+    public void createEventTest_BadRequest_EmptyInput() throws Exception {
         EventDto eventDto = EventDto.builder().build();
 
         this.mockMvc.perform(post("/api/events")
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(this.objectMapper.writeValueAsString(eventDto))
                     )
+                .andExpect(status().isBadRequest());
+    }
+
+    @Test
+    public void createEventTest_BadRequest_WrongInput() throws Exception {
+        EventDto eventDto = EventDto.builder()
+                .beginEnrollmentDateTime(LocalDateTime.of(2020, 12, 26, 14, 21))
+                .closeEnrollmentDateTime(LocalDateTime.of(2020, 12, 24, 14, 21))
+                .beginEventDateTime(LocalDateTime.of(2020, 12, 27, 14, 21))
+                .endEventDateTime(LocalDateTime.of(2020, 12, 26, 14, 21))
+                .basePrice(200)
+                .maxPrice(200)
+                .limitOfEnrollment(100)
+                .location("우리집")
+                .build();
+
+        this.mockMvc.perform(post("/api/events")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(this.objectMapper.writeValueAsString(eventDto))
+                )
                 .andExpect(status().isBadRequest());
     }
 }
