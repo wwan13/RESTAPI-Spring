@@ -1,9 +1,9 @@
 package com.example.inflearnrestapiwithspring.events;
 
+import com.example.inflearnrestapiwithspring.common.TestDescription;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -31,6 +31,7 @@ public class EventControllerTests {
     ObjectMapper objectMapper;
 
     @Test
+    @TestDescription("정상적으로 이벤트를 생성하는 테스트")
     public void createEvent() throws Exception {
 
         EventDto event = EventDto.builder()
@@ -57,6 +58,7 @@ public class EventControllerTests {
     }
 
     @Test
+    @TestDescription("입력 받을 수 없는 값을 사용한 경우 에러가 발생하는 테스트")
     public void createEventTest_BadRequest_UselessDatas() throws Exception {
 
         Event event = Event.builder()
@@ -85,6 +87,7 @@ public class EventControllerTests {
     }
 
     @Test
+    @TestDescription("입력값이 비어있는 경우 에러가 발생하는 테스트")
     public void createEventTest_BadRequest_EmptyInput() throws Exception {
         EventDto eventDto = EventDto.builder().build();
 
@@ -96,6 +99,7 @@ public class EventControllerTests {
     }
 
     @Test
+    @TestDescription("입력값이 잘못된 경우 에러가 발생하는 테스트")
     public void createEventTest_BadRequest_WrongInput() throws Exception {
         EventDto eventDto = EventDto.builder()
                 .beginEnrollmentDateTime(LocalDateTime.of(2020, 12, 26, 14, 21))
